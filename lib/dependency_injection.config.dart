@@ -10,9 +10,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-import 'core/domain/repository/example_repository.dart' as _i928;
-import 'core/infrastructure/repositories/example_repository_impl.dart' as _i434;
+import 'core/core.dart' as _i446;
+import 'core/infrastructure/repositories/auth_repository_impl.dart' as _i914;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -25,8 +26,8 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i928.ExampleRepository>(
-        () => _i434.ExampleRepositoryImpl());
+    gh.lazySingleton<_i446.AuthRepository>(() => _i914.AuthRepositoryImpl(
+        sharedPreferences: gh<_i460.SharedPreferences>()));
     return this;
   }
 }

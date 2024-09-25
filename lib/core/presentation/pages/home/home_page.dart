@@ -8,8 +8,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("hello home");
-
     return Scaffold(
       body: Container(
         color: Colors.red,

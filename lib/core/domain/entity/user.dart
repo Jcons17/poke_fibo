@@ -1,12 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+abstract interface class User {
+  String get email;
+  String get name;
+  String get code;
 
-part 'user.freezed.dart';
-
-@freezed
-class User with _$User {
-  const factory User({
-    required String firstName,
-    required String lastName,
-    required int age,
-  }) = _User;
+  String toJson();
 }

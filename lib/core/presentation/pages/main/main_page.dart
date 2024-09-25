@@ -23,43 +23,25 @@ class MainPage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               backgroundColor: context.theme.colorScheme.onPrimary,
-              activeIcon: Column(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: context.theme.colorScheme.primary,
-                  ),
-                  Text("Home"),
-                ],
+              label: "Home",
+              activeIcon: Icon(
+                Icons.home,
+                color: context.theme.colorScheme.primary,
               ),
-              icon: Column(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: context.theme.colorScheme.secondary,
-                  ),
-                  Text("Home"),
-                ],
+              icon: Icon(
+                Icons.home,
+                color: context.theme.colorScheme.secondary,
               ),
             ),
             BottomNavigationBarItem(
-              activeIcon: Column(
-                children: [
-                  Icon(
-                    Icons.people,
-                    color: context.theme.colorScheme.primary,
-                  ),
-                  Text("Team"),
-                ],
+              label: "Team",
+              activeIcon: Icon(
+                Icons.people,
+                color: context.theme.colorScheme.primary,
               ),
-              icon: Column(
-                children: [
-                  Icon(
-                    Icons.people,
-                    color: context.theme.colorScheme.secondary,
-                  ),
-                  Text("Team"),
-                ],
+              icon: Icon(
+                Icons.people,
+                color: context.theme.colorScheme.secondary,
               ),
             ),
           ],

@@ -35,6 +35,8 @@ void createExportFile(Directory directory) {
     if (file is File &&
         !file.path.contains(".g.") &&
         !file.path.contains(".freezed.") &&
+        !file.path.contains("._state.") &&
+        !file.path.contains("._event.") &&
         file.path.endsWith('.dart') &&
         file.path != exportFilePath) {
       // Agrega la línea de exportación para cada archivo Dart

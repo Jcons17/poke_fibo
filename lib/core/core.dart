@@ -2,6 +2,7 @@
 export 'app_routes.gr.dart';
 export 'my_app_widget.dart';
 export 'app_routes.dart';
+export 'utils/utils.dart';
 export 'domain/domain.dart';
 export 'application/application.dart';
 export 'presentation/presentation.dart';

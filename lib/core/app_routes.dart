@@ -10,8 +10,34 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: HomeRoute.page,
-          initial: true,
           path: "/home",
+        ),
+        AutoRoute(
+          page: LoginRoute.page,
+          path: "/login",
+        ),
+        AutoRoute(
+          page: SignUpRoute.page,
+          path: "/sign-up",
+        ),
+        AutoRoute(
+          page: MainRoute.page,
+          path: "/",
+          initial: true,
+          children: [
+            AutoRoute(
+              page: HomeRoute.page,
+              path: "/home",
+            ),
+            AutoRoute(
+              page: PokemosTeamsRoute.page,
+              path: "/team",
+            ),
+            AutoRoute(
+              page: PokemonDetailsRoute.page,
+              path: "/pokemon",
+            ),
+          ],
         ),
       ];
 }

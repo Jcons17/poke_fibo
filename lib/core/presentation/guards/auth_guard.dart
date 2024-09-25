@@ -14,6 +14,8 @@ class AuthGuard extends AutoRouteGuard {
         return;
       } else {
         // TODO: finger
+        resolver.next(true);
+        return;
       }
     } else {
       router.replace(LoginRoute());

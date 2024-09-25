@@ -54,22 +54,6 @@ class _MyAppState extends State<MyApp> {
           Locale("en"),
         ],
         routerConfig: _appRouter.config(),
-        builder: (context, child) {
-          return BlocListener<AuthBloc, AuthState>(
-            listenWhen: (previous, current) => previous.userSession.value != current.userSession.value,
-            listener: (context, state) {
-              if (state.userSession.value != null) {
-                context.router.replace(MainRoute());
-                return;
-              }
-              if (state.userSession.value == null) {
-                context.router.replace(LoginRoute());
-                return;
-              }
-            },
-            child: child,
-          );
-        },
       ),
     );
   }

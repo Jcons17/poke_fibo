@@ -47,7 +47,7 @@ void createExportFile(Directory directory) {
   }
   // Incluye exportaciones de subcarpetas
   for (var file in files) {
-    if (file is Directory) {
+    if (file is Directory && !file.path.contains("._bloc.")) {
       final String subFolderName = file.uri.pathSegments.elementAt(file.uri.pathSegments.length - 2);
       exports.add("export '$subFolderName/$subFolderName.dart';");
     }

@@ -23,7 +23,15 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     });
   }
 
-  void setName(String value) {}
+  void setName(String value) {
+    add(SetNameSignUp(name: value));
+  }
 
-  void setEmail(String value) {}
+  void setEmail(String value) {
+    add(SetEmailSignUp(email: value));
+  }
+
+  void setCode(String value) {
+    add(SetCodeSignUp(code: value));
+  }
 }

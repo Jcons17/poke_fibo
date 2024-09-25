@@ -68,4 +68,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void signUp(User user) {
     add(MakeSignUp(user));
   }
+
+  void logout() {
+    add(Logout());
+  }
 }

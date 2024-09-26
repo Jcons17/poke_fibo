@@ -2,7 +2,7 @@ abstract class Pokemon {
   List<Ability> get abilities;
   int get baseExperience;
   Cries get cries;
-  List<Species>? get forms;
+  List<NameUrl>? get forms;
   List<GameIndex>? get gameIndices;
   int get height;
   int get id;
@@ -11,7 +11,7 @@ abstract class Pokemon {
   List<Move> get moves;
   String get name;
   int get order;
-  Species get species;
+  NameUrl get species;
   Sprites get sprites;
   List<Stat> get stats;
   int get weight;
@@ -20,12 +20,12 @@ abstract class Pokemon {
 }
 
 abstract class Ability {
-  Species? get ability;
+  NameUrl? get ability;
   bool? get isHidden;
   int? get slot;
 }
 
-abstract class Species {
+abstract class NameUrl {
   String? get name;
   String? get url;
 }
@@ -37,18 +37,18 @@ abstract class Cries {
 
 abstract class GameIndex {
   int? get gameIndex;
-  Species? get version;
+  NameUrl? get version;
 }
 
 abstract class Move {
-  Species? get move;
+  NameUrl? get move;
   List<VersionGroupDetail>? get versionGroupDetails;
 }
 
 abstract class VersionGroupDetail {
   int? get levelLearnedAt;
-  Species? get moveLearnMethod;
-  Species? get versionGroup;
+  NameUrl? get moveLearnMethod;
+  NameUrl? get versionGroup;
 }
 
 abstract class Sprites {
@@ -65,5 +65,5 @@ abstract class Sprites {
 abstract class Stat {
   int? get baseStat;
   int? get effort;
-  Species? get stat;
+  NameUrl? get stat;
 }

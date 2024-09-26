@@ -43,9 +43,10 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
         case AddPokemon(pokemon: final pokemon):
           emit(state.copyWith(addPokemonToMyTeam: state.addPokemonToMyTeam.copyWithLoading()));
           final result = await pokeRepository.savePokemonForMyTeam(pokemon);
+
+          getMyPokemons();
           emit(
             state.copyWith(
-              myPokemons: state.myPokemons.copyWithData(data: result),
               addPokemonToMyTeam: state.myPokemons.copyWithData(data: result),
             ),
           );
@@ -57,15 +58,10 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
           result.fold((l) {
             emit(state.copyWith(deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithData(data: result)));
           }, (r) {
-            final newList = state.myPokemons.value!
-                .where(
-                  (element) => element.id != pokemon.id,
-                )
-                .toList();
+            getMyPokemons();
 
             emit(
               state.copyWith(
-                myPokemons: state.myPokemons.copyWithData(data: right(newList)),
                 deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithData(data: result),
               ),
             );
@@ -88,5 +84,9 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
 
   void setPokemonOnTeam(Pokemon pokemon) {
     add(AddPokemon(pokemon: pokemon));
+  }
+
+  deletePokemon(Pokemon pokemon) {
+    add(DeletePokemon(pokemon: pokemon));
   }
 }

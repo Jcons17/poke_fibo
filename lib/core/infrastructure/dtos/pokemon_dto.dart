@@ -8,7 +8,7 @@ class PokemonDto implements Pokemon {
   final List<AbilityDto> abilities;
   final int baseExperience;
   final CriesDto cries;
-  final List<SpeciesDto>? forms;
+  final List<NameUrlDto>? forms;
   final List<GameIndexDto>? gameIndices;
   final int height;
   final int id;
@@ -17,7 +17,7 @@ class PokemonDto implements Pokemon {
   final List<MoveDto> moves;
   final String name;
   final int order;
-  final SpeciesDto species;
+  final NameUrlDto species;
   final SpritesDto sprites;
   final List<StatDto> stats;
   final int weight;
@@ -44,7 +44,7 @@ class PokemonDto implements Pokemon {
     List<AbilityDto>? abilities,
     int? baseExperience,
     CriesDto? cries,
-    List<SpeciesDto>? forms,
+    List<NameUrlDto>? forms,
     List<GameIndexDto>? gameIndices,
     int? height,
     int? id,
@@ -53,7 +53,7 @@ class PokemonDto implements Pokemon {
     List<MoveDto>? moves,
     String? name,
     int? order,
-    SpeciesDto? species,
+    NameUrlDto? species,
     SpritesDto? sprites,
     List<StatDto>? stats,
     int? weight,
@@ -104,7 +104,7 @@ class PokemonDto implements Pokemon {
       abilities: List<AbilityDto>.from(map['abilities']?.map((x) => AbilityDto.fromMap(x))),
       baseExperience: map['base_experience']?.toInt() ?? 0,
       cries: CriesDto.fromMap(map['cries']),
-      forms: map['forms'] != null ? List<SpeciesDto>.from(map['forms']?.map((x) => SpeciesDto.fromMap(x))) : null,
+      forms: map['forms'] != null ? List<NameUrlDto>.from(map['forms']?.map((x) => NameUrlDto.fromMap(x))) : null,
       gameIndices: map['gameIndices'] != null
           ? List<GameIndexDto>.from(map['game_indices']?.map((x) => GameIndexDto.fromMap(x)))
           : null,
@@ -115,7 +115,7 @@ class PokemonDto implements Pokemon {
       moves: List<MoveDto>.from(map['moves']?.map((x) => MoveDto.fromMap(x))),
       name: map['name'] ?? '',
       order: map['order']?.toInt() ?? 0,
-      species: SpeciesDto.fromMap(map['species']),
+      species: NameUrlDto.fromMap(map['species']),
       sprites: SpritesDto.fromMap(map['sprites']),
       stats: List<StatDto>.from(map['stats']?.map((x) => StatDto.fromMap(x))),
       weight: map['weight']?.toInt() ?? 0,
@@ -177,7 +177,7 @@ class PokemonDto implements Pokemon {
 }
 
 class AbilityDto implements Ability {
-  final SpeciesDto? ability;
+  final NameUrlDto? ability;
   final bool? isHidden;
   final int? slot;
   AbilityDto({
@@ -187,7 +187,7 @@ class AbilityDto implements Ability {
   });
 
   AbilityDto copyWith({
-    SpeciesDto? ability,
+    NameUrlDto? ability,
     bool? isHidden,
     int? slot,
   }) {
@@ -208,7 +208,7 @@ class AbilityDto implements Ability {
 
   factory AbilityDto.fromMap(Map<String, dynamic> map) {
     return AbilityDto(
-      ability: map['ability'] != null ? SpeciesDto.fromMap(map['ability']) : null,
+      ability: map['ability'] != null ? NameUrlDto.fromMap(map['ability']) : null,
       isHidden: map['is_hidden'],
       slot: map['slot']?.toInt(),
     );
@@ -284,7 +284,7 @@ class CriesDto implements Cries {
 
 class GameIndexDto implements GameIndex {
   final int? gameIndex;
-  final SpeciesDto? version;
+  final NameUrlDto? version;
   GameIndexDto({
     this.gameIndex,
     this.version,
@@ -292,7 +292,7 @@ class GameIndexDto implements GameIndex {
 
   GameIndexDto copyWith({
     int? gameIndex,
-    SpeciesDto? version,
+    NameUrlDto? version,
   }) {
     return GameIndexDto(
       gameIndex: gameIndex ?? this.gameIndex,
@@ -310,7 +310,7 @@ class GameIndexDto implements GameIndex {
   factory GameIndexDto.fromMap(Map<String, dynamic> map) {
     return GameIndexDto(
       gameIndex: map['game_index']?.toInt(),
-      version: map['version'] != null ? SpeciesDto.fromMap(map['version']) : null,
+      version: map['version'] != null ? NameUrlDto.fromMap(map['version']) : null,
     );
   }
 
@@ -333,7 +333,7 @@ class GameIndexDto implements GameIndex {
 }
 
 class MoveDto implements Move {
-  final SpeciesDto? move;
+  final NameUrlDto? move;
   final List<VersionGroupDetailDto>? versionGroupDetails;
   MoveDto({
     this.move,
@@ -341,7 +341,7 @@ class MoveDto implements Move {
   });
 
   MoveDto copyWith({
-    SpeciesDto? move,
+    NameUrlDto? move,
     List<VersionGroupDetailDto>? versionGroupDetails,
   }) {
     return MoveDto(
@@ -359,7 +359,7 @@ class MoveDto implements Move {
 
   factory MoveDto.fromMap(Map<String, dynamic> map) {
     return MoveDto(
-      move: map['move'] != null ? SpeciesDto.fromMap(map['move']) : null,
+      move: map['move'] != null ? NameUrlDto.fromMap(map['move']) : null,
       versionGroupDetails: map['version_group_details'] != null
           ? List<VersionGroupDetailDto>.from(map['version_group_details']?.map((x) => VersionGroupDetailDto.fromMap(x)))
           : null,
@@ -386,8 +386,8 @@ class MoveDto implements Move {
 
 class VersionGroupDetailDto implements VersionGroupDetail {
   final int? levelLearnedAt;
-  final SpeciesDto? moveLearnMethod;
-  final SpeciesDto? versionGroup;
+  final NameUrlDto? moveLearnMethod;
+  final NameUrlDto? versionGroup;
   VersionGroupDetailDto({
     this.levelLearnedAt,
     this.moveLearnMethod,
@@ -396,8 +396,8 @@ class VersionGroupDetailDto implements VersionGroupDetail {
 
   VersionGroupDetailDto copyWith({
     int? levelLearnedAt,
-    SpeciesDto? moveLearnMethod,
-    SpeciesDto? versionGroup,
+    NameUrlDto? moveLearnMethod,
+    NameUrlDto? versionGroup,
   }) {
     return VersionGroupDetailDto(
       levelLearnedAt: levelLearnedAt ?? this.levelLearnedAt,
@@ -417,8 +417,8 @@ class VersionGroupDetailDto implements VersionGroupDetail {
   factory VersionGroupDetailDto.fromMap(Map<String, dynamic> map) {
     return VersionGroupDetailDto(
       levelLearnedAt: map['level_learned_at']?.toInt(),
-      moveLearnMethod: map['move_learn_method'] != null ? SpeciesDto.fromMap(map['move_learn_method']) : null,
-      versionGroup: map['version_group'] != null ? SpeciesDto.fromMap(map['version_group']) : null,
+      moveLearnMethod: map['move_learn_method'] != null ? NameUrlDto.fromMap(map['move_learn_method']) : null,
+      versionGroup: map['version_group'] != null ? NameUrlDto.fromMap(map['version_group']) : null,
     );
   }
 
@@ -552,7 +552,7 @@ class SpritesDto implements Sprites {
 class StatDto implements Stat {
   final int? baseStat;
   final int? effort;
-  final SpeciesDto? stat;
+  final NameUrlDto? stat;
   StatDto({
     this.baseStat,
     this.effort,
@@ -562,7 +562,7 @@ class StatDto implements Stat {
   StatDto copyWith({
     int? baseStat,
     int? effort,
-    SpeciesDto? stat,
+    NameUrlDto? stat,
   }) {
     return StatDto(
       baseStat: baseStat ?? this.baseStat,
@@ -583,7 +583,7 @@ class StatDto implements Stat {
     return StatDto(
       baseStat: map['base_stat']?.toInt(),
       effort: map['effort']?.toInt(),
-      stat: map['stat'] != null ? SpeciesDto.fromMap(map['stat']) : null,
+      stat: map['stat'] != null ? NameUrlDto.fromMap(map['stat']) : null,
     );
   }
 
@@ -605,22 +605,22 @@ class StatDto implements Stat {
   int get hashCode => baseStat.hashCode ^ effort.hashCode ^ stat.hashCode;
 }
 
-class SpeciesDto implements Species {
+class NameUrlDto implements NameUrl {
   final String? name;
   final String? url;
-  SpeciesDto({
+  NameUrlDto({
     this.name,
     this.url,
   });
 
   @override
-  String toString() => 'SpeciesDto(name: $name, url: $url)';
+  String toString() => 'NameUrlDto(name: $name, url: $url)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is SpeciesDto && other.name == name && other.url == url;
+    return other is NameUrlDto && other.name == name && other.url == url;
   }
 
   @override
@@ -633,8 +633,8 @@ class SpeciesDto implements Species {
     };
   }
 
-  factory SpeciesDto.fromMap(Map<String, dynamic> map) {
-    return SpeciesDto(
+  factory NameUrlDto.fromMap(Map<String, dynamic> map) {
+    return NameUrlDto(
       name: map['name'],
       url: map['url'],
     );
@@ -642,5 +642,5 @@ class SpeciesDto implements Species {
 
   String toJson() => json.encode(toMap());
 
-  factory SpeciesDto.fromJson(String source) => SpeciesDto.fromMap(json.decode(source));
+  factory NameUrlDto.fromJson(String source) => NameUrlDto.fromMap(json.decode(source));
 }

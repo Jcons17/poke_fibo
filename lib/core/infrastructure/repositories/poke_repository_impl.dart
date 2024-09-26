@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_template/core/domain/entity/move_expanded.dart';
+import 'package:flutter_template/core/infrastructure/dtos/move_expanded_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -123,5 +125,33 @@ class PokeRepositoryImpl implements PokeRepository {
     await sharedPreferences.setStringList(TEAM_POKEMON_KEY, newList);
 
     return right([...?pokemonListJson, pokemon]);
+  }
+
+  @override
+  Future<Either<Exception, List<MoveExpanded>>> getMoves({required List<String> ids}) async {
+    final results = ids
+        .map(
+          (id) => client.get(Uri.parse(api_url + "move/" + id)),
+        )
+        .toList();
+
+    final pokemonsToFetch = await Future.wait(results).then(
+      (value) => value.toList(),
+    );
+
+    final map = pokemonsToFetch
+        .map(
+          (response) {
+            if (response.statusCode == 200) {
+              final data = jsonDecode(response.body);
+              return MoveExpandedDto.fromMap(data);
+            }
+            return null;
+          },
+        )
+        .whereNotNull()
+        .toList();
+
+    return right(map);
   }
 }

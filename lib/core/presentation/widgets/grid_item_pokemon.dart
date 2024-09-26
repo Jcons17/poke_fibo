@@ -71,7 +71,10 @@ class GridItemPokemon extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: InkWell(
                     onTap: () {
-                      context.read<PokemonBloc>().setPokemonOnTeam(pokemon);
+                      if (isInTheTeam) {
+                        return context.read<PokemonBloc>().deletePokemon(pokemon);
+                      }
+                      return context.read<PokemonBloc>().setPokemonOnTeam(pokemon);
                     },
                     child: Icon(
                       this.isInTheTeam ? Icons.star : Icons.star_border,

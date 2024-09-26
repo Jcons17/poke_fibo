@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core.dart';
@@ -42,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           result.fold(
             (l) {},
             (r) {
-              emit(state.copyWith(userSession: state.userSession.copyWithData(data: null)));
+              emit(state.copyWith(userSession: LoadedData()));
             },
           );
 

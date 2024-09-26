@@ -13,7 +13,7 @@ import 'package:flutter_template/core/infrastructure/dtos/remote_pokemon_respons
 
 @LazySingleton(as: PokeRepository)
 class PokeRepositoryImpl implements PokeRepository {
-  final http.BaseClient client;
+  final http.Client client;
   final SharedPreferences sharedPreferences;
 
   PokeRepositoryImpl({
@@ -51,8 +51,7 @@ class PokeRepositoryImpl implements PokeRepository {
     int offset = 0,
   }) async {
     try {
-      final url = Uri.parse(api_url).replace(
-        path: "pokemon",
+      final url = Uri.parse(api_url + "pokemon").replace(
         queryParameters: {"offset": offset.toString(), "limit": limit.toString()},
       );
 

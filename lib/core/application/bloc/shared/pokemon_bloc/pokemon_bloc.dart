@@ -11,7 +11,7 @@ part 'pokemon_state.dart';
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   final PokeRepository pokeRepository;
 
-  static const int limit = 18;
+  static const int limit = 30;
 
   PokemonBloc({
     required this.pokeRepository,
@@ -21,7 +21,19 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
         case GetAllPokemons():
           emit(state.copyWith(allPokemons: state.allPokemons.copyWithLoading()));
           final result = await pokeRepository.getAllPokemon(limit: limit, offset: limit * state.offset);
-          emit(state.copyWith(allPokemons: state.allPokemons.copyWithData(data: result), offset: state.offset + 1));
+          emit(
+            state.copyWith(
+              allPokemons: state.allPokemons.copyWithData(
+                data: result.map(
+                  (r) => [
+                    ...?state.allPokemons.value,
+                    ...r,
+                  ],
+                ),
+              ),
+              offset: state.offset + 1,
+            ),
+          );
           return;
         case GetMyPokemons():
           emit(state.copyWith(myPokemons: state.myPokemons.copyWithLoading()));
@@ -31,15 +43,50 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
         case AddPokemon(pokemon: final pokemon):
           emit(state.copyWith(addPokemonToMyTeam: state.addPokemonToMyTeam.copyWithLoading()));
           final result = await pokeRepository.savePokemonForMyTeam(pokemon);
-          emit(state.copyWith(addPokemonToMyTeam: state.myPokemons.copyWithData(data: result)));
+          emit(
+            state.copyWith(
+              myPokemons: state.myPokemons.copyWithData(data: result),
+              addPokemonToMyTeam: state.myPokemons.copyWithData(data: result),
+            ),
+          );
           return;
         case DeletePokemon(pokemon: final pokemon):
           emit(state.copyWith(deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithLoading()));
           final result = await pokeRepository.deletePokemonForMyTeam(pokemon);
-          emit(state.copyWith(deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithData(data: result)));
+
+          result.fold((l) {
+            emit(state.copyWith(deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithData(data: result)));
+          }, (r) {
+            final newList = state.myPokemons.value!
+                .where(
+                  (element) => element.id != pokemon.id,
+                )
+                .toList();
+
+            emit(
+              state.copyWith(
+                myPokemons: state.myPokemons.copyWithData(data: right(newList)),
+                deletePokemonToMyTeam: state.deletePokemonToMyTeam.copyWithData(data: result),
+              ),
+            );
+          });
 
           return;
       }
     });
+    getMyPokemons();
+    getAllPokemons();
+  }
+
+  void getMyPokemons() {
+    add(GetMyPokemons());
+  }
+
+  void getAllPokemons() {
+    add(GetAllPokemons());
+  }
+
+  void setPokemonOnTeam(Pokemon pokemon) {
+    add(AddPokemon(pokemon: pokemon));
   }
 }

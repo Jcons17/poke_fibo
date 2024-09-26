@@ -81,14 +81,14 @@ class PokemonDto implements Pokemon {
   Map<String, dynamic> toMap() {
     return {
       'abilities': abilities.map((x) => x.toMap()).toList(),
-      'baseExperience': baseExperience,
+      'base_experience': baseExperience,
       'cries': cries.toMap(),
       'forms': forms?.map((x) => x.toMap()).toList(),
-      'gameIndices': gameIndices?.map((x) => x.toMap()).toList(),
+      'game_indices': gameIndices?.map((x) => x.toMap()).toList(),
       'height': height,
       'id': id,
-      'isDefault': isDefault,
-      'locationAreaEncounters': locationAreaEncounters,
+      'is_default': isDefault,
+      'location_area_encounters': locationAreaEncounters,
       'moves': moves.map((x) => x.toMap()).toList(),
       'name': name,
       'order': order,
@@ -102,16 +102,16 @@ class PokemonDto implements Pokemon {
   factory PokemonDto.fromMap(Map<String, dynamic> map) {
     return PokemonDto(
       abilities: List<AbilityDto>.from(map['abilities']?.map((x) => AbilityDto.fromMap(x))),
-      baseExperience: map['baseExperience']?.toInt() ?? 0,
+      baseExperience: map['base_experience']?.toInt() ?? 0,
       cries: CriesDto.fromMap(map['cries']),
       forms: map['forms'] != null ? List<SpeciesDto>.from(map['forms']?.map((x) => SpeciesDto.fromMap(x))) : null,
       gameIndices: map['gameIndices'] != null
-          ? List<GameIndexDto>.from(map['gameIndices']?.map((x) => GameIndexDto.fromMap(x)))
+          ? List<GameIndexDto>.from(map['game_indices']?.map((x) => GameIndexDto.fromMap(x)))
           : null,
       height: map['height']?.toInt() ?? 0,
       id: map['id']?.toInt() ?? 0,
-      isDefault: map['isDefault'] ?? false,
-      locationAreaEncounters: map['locationAreaEncounters'] ?? '',
+      isDefault: map['is_default'] ?? false,
+      locationAreaEncounters: map['location_area_encounters'] ?? '',
       moves: List<MoveDto>.from(map['moves']?.map((x) => MoveDto.fromMap(x))),
       name: map['name'] ?? '',
       order: map['order']?.toInt() ?? 0,
@@ -201,7 +201,7 @@ class AbilityDto implements Ability {
   Map<String, dynamic> toMap() {
     return {
       'ability': ability?.toMap(),
-      'isHidden': isHidden,
+      'is_hidden': isHidden,
       'slot': slot,
     };
   }
@@ -209,7 +209,7 @@ class AbilityDto implements Ability {
   factory AbilityDto.fromMap(Map<String, dynamic> map) {
     return AbilityDto(
       ability: map['ability'] != null ? SpeciesDto.fromMap(map['ability']) : null,
-      isHidden: map['isHidden'],
+      isHidden: map['is_hidden'],
       slot: map['slot']?.toInt(),
     );
   }
@@ -302,14 +302,14 @@ class GameIndexDto implements GameIndex {
 
   Map<String, dynamic> toMap() {
     return {
-      'gameIndex': gameIndex,
+      'game_index': gameIndex,
       'version': version?.toMap(),
     };
   }
 
   factory GameIndexDto.fromMap(Map<String, dynamic> map) {
     return GameIndexDto(
-      gameIndex: map['gameIndex']?.toInt(),
+      gameIndex: map['game_index']?.toInt(),
       version: map['version'] != null ? SpeciesDto.fromMap(map['version']) : null,
     );
   }
@@ -353,15 +353,15 @@ class MoveDto implements Move {
   Map<String, dynamic> toMap() {
     return {
       'move': move?.toMap(),
-      'versionGroupDetails': versionGroupDetails?.map((x) => x.toMap()).toList(),
+      'version_group_details': versionGroupDetails?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory MoveDto.fromMap(Map<String, dynamic> map) {
     return MoveDto(
       move: map['move'] != null ? SpeciesDto.fromMap(map['move']) : null,
-      versionGroupDetails: map['versionGroupDetails'] != null
-          ? List<VersionGroupDetailDto>.from(map['versionGroupDetails']?.map((x) => VersionGroupDetailDto.fromMap(x)))
+      versionGroupDetails: map['version_group_details'] != null
+          ? List<VersionGroupDetailDto>.from(map['version_group_details']?.map((x) => VersionGroupDetailDto.fromMap(x)))
           : null,
     );
   }
@@ -408,17 +408,17 @@ class VersionGroupDetailDto implements VersionGroupDetail {
 
   Map<String, dynamic> toMap() {
     return {
-      'levelLearnedAt': levelLearnedAt,
-      'moveLearnMethod': moveLearnMethod?.toMap(),
-      'versionGroup': versionGroup?.toMap(),
+      'level_learned_at': levelLearnedAt,
+      'move_learn_method': moveLearnMethod?.toMap(),
+      'version_group': versionGroup?.toMap(),
     };
   }
 
   factory VersionGroupDetailDto.fromMap(Map<String, dynamic> map) {
     return VersionGroupDetailDto(
-      levelLearnedAt: map['levelLearnedAt']?.toInt(),
-      moveLearnMethod: map['moveLearnMethod'] != null ? SpeciesDto.fromMap(map['moveLearnMethod']) : null,
-      versionGroup: map['versionGroup'] != null ? SpeciesDto.fromMap(map['versionGroup']) : null,
+      levelLearnedAt: map['level_learned_at']?.toInt(),
+      moveLearnMethod: map['move_learn_method'] != null ? SpeciesDto.fromMap(map['move_learn_method']) : null,
+      versionGroup: map['version_group'] != null ? SpeciesDto.fromMap(map['version_group']) : null,
     );
   }
 
@@ -488,27 +488,27 @@ class SpritesDto implements Sprites {
 
   Map<String, dynamic> toMap() {
     return {
-      'backDefault': backDefault,
-      'backFemale': backFemale,
-      'backShiny': backShiny,
-      'backShinyFemale': backShinyFemale,
-      'frontDefault': frontDefault,
-      'frontFemale': frontFemale,
-      'frontShiny': frontShiny,
-      'frontShinyFemale': frontShinyFemale,
+      'back_default': backDefault,
+      'back_female': backFemale,
+      'back_shiny': backShiny,
+      'back_shiny_female': backShinyFemale,
+      'front_default': frontDefault,
+      'front_female': frontFemale,
+      'front_shiny': frontShiny,
+      'front_shiny_female': frontShinyFemale,
     };
   }
 
   factory SpritesDto.fromMap(Map<String, dynamic> map) {
     return SpritesDto(
-      backDefault: map['backDefault'],
-      backFemale: map['backFemale'],
-      backShiny: map['backShiny'],
-      backShinyFemale: map['backShinyFemale'],
-      frontDefault: map['frontDefault'],
-      frontFemale: map['frontFemale'],
-      frontShiny: map['frontShiny'],
-      frontShinyFemale: map['frontShinyFemale'],
+      backDefault: map['back_default'],
+      backFemale: map['back_female'],
+      backShiny: map['back_shiny'],
+      backShinyFemale: map['back_shiny_female'],
+      frontDefault: map['front_default'],
+      frontFemale: map['front_female'],
+      frontShiny: map['front_shiny'],
+      frontShinyFemale: map['front_shiny_female'],
     );
   }
 
@@ -573,7 +573,7 @@ class StatDto implements Stat {
 
   Map<String, dynamic> toMap() {
     return {
-      'baseStat': baseStat,
+      'base_stat': baseStat,
       'effort': effort,
       'stat': stat?.toMap(),
     };
@@ -581,7 +581,7 @@ class StatDto implements Stat {
 
   factory StatDto.fromMap(Map<String, dynamic> map) {
     return StatDto(
-      baseStat: map['baseStat']?.toInt(),
+      baseStat: map['base_stat']?.toInt(),
       effort: map['effort']?.toInt(),
       stat: map['stat'] != null ? SpeciesDto.fromMap(map['stat']) : null,
     );

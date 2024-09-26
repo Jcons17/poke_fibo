@@ -1,5 +1,6 @@
 import 'package:flutter_template/core/core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,10 @@ final getIt = GetIt.instance;
 Future<void> configureDependencies() async {
   getIt.registerLazySingletonAsync<SharedPreferences>(
     () => SharedPreferences.getInstance(),
+  );
+
+  getIt.registerLazySingleton<http.Client>(
+    () => http.Client(),
   );
 
   await getIt.isReady<SharedPreferences>();

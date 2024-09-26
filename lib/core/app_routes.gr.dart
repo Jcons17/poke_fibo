@@ -9,6 +9,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
+import 'package:flutter_template/core/core.dart' as _i9;
 import 'package:flutter_template/core/presentation/pages/home/home_page.dart'
     as _i1;
 import 'package:flutter_template/core/presentation/pages/login/login_page.dart'
@@ -81,10 +83,17 @@ class MainRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.PokemonDetailsPage]
-class PokemonDetailsRoute extends _i7.PageRouteInfo<void> {
-  const PokemonDetailsRoute({List<_i7.PageRouteInfo>? children})
-      : super(
+class PokemonDetailsRoute extends _i7.PageRouteInfo<PokemonDetailsRouteArgs> {
+  PokemonDetailsRoute({
+    _i8.Key? key,
+    required _i9.Pokemon pokemon,
+    List<_i7.PageRouteInfo>? children,
+  }) : super(
           PokemonDetailsRoute.name,
+          args: PokemonDetailsRouteArgs(
+            key: key,
+            pokemon: pokemon,
+          ),
           initialChildren: children,
         );
 
@@ -93,9 +102,29 @@ class PokemonDetailsRoute extends _i7.PageRouteInfo<void> {
   static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i4.PokemonDetailsPage();
+      final args = data.argsAs<PokemonDetailsRouteArgs>();
+      return _i4.PokemonDetailsPage(
+        key: args.key,
+        pokemon: args.pokemon,
+      );
     },
   );
+}
+
+class PokemonDetailsRouteArgs {
+  const PokemonDetailsRouteArgs({
+    this.key,
+    required this.pokemon,
+  });
+
+  final _i8.Key? key;
+
+  final _i9.Pokemon pokemon;
+
+  @override
+  String toString() {
+    return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon}';
+  }
 }
 
 /// generated route for

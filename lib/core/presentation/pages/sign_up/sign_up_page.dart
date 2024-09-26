@@ -95,7 +95,7 @@ class SignUpPage extends StatelessWidget {
                                   "Code",
                                 ),
                               ),
-                              keyboardType: TextInputType.visiblePassword,
+                              keyboardType: TextInputType.number,
                               maxLength: 6,
                               maxLines: 1,
                               obscureText: true,

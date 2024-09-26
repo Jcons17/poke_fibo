@@ -62,6 +62,7 @@ class PokeRepositoryImpl implements PokeRepository {
       if (response.statusCode == 200) {
         final data = RemotePokemonResponseDto.fromJson(jsonDecode(response.body));
         final results = data.results
+            .take(limit)
             .map(
               (e) => client.get(Uri.parse(e.url)),
             )

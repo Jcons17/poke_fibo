@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                               ),
                               maxLength: 6,
                               maxLines: 1,
-                              keyboardType: TextInputType.visiblePassword,
+                              keyboardType: TextInputType.number,
                               obscureText: true,
                               enableSuggestions: false,
                               autocorrect: false,

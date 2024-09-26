@@ -12,4 +12,8 @@ targets:
         generate_for:
           - lib/core/domain/entity/**.dart
           - lib/core/application/**/**_state.dart
-          - lib/core/application/**/**_bloc.dart   
+          - lib/core/application/**/**_bloc.dart 
+      mockito|mockBuilder:
+        generate_for:
+          - test/mock/mock.dart
+                

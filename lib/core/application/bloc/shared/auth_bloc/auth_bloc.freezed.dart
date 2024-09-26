@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
   LoadedData<User> get userSession => throw _privateConstructorUsedError;
-  bool get itWasUsedCode => throw _privateConstructorUsedError;
-  bool get itWasUsedFinger => throw _privateConstructorUsedError;
+  bool get itWasUsedLocalAuth => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,8 +31,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call(
-      {LoadedData<User> userSession, bool itWasUsedCode, bool itWasUsedFinger});
+  $Res call({LoadedData<User> userSession, bool itWasUsedLocalAuth});
 }
 
 /// @nodoc
@@ -52,21 +50,16 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @override
   $Res call({
     Object? userSession = null,
-    Object? itWasUsedCode = null,
-    Object? itWasUsedFinger = null,
+    Object? itWasUsedLocalAuth = null,
   }) {
     return _then(_value.copyWith(
       userSession: null == userSession
           ? _value.userSession
           : userSession // ignore: cast_nullable_to_non_nullable
               as LoadedData<User>,
-      itWasUsedCode: null == itWasUsedCode
-          ? _value.itWasUsedCode
-          : itWasUsedCode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      itWasUsedFinger: null == itWasUsedFinger
-          ? _value.itWasUsedFinger
-          : itWasUsedFinger // ignore: cast_nullable_to_non_nullable
+      itWasUsedLocalAuth: null == itWasUsedLocalAuth
+          ? _value.itWasUsedLocalAuth
+          : itWasUsedLocalAuth // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -80,8 +73,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {LoadedData<User> userSession, bool itWasUsedCode, bool itWasUsedFinger});
+  $Res call({LoadedData<User> userSession, bool itWasUsedLocalAuth});
 }
 
 /// @nodoc
@@ -98,21 +90,16 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userSession = null,
-    Object? itWasUsedCode = null,
-    Object? itWasUsedFinger = null,
+    Object? itWasUsedLocalAuth = null,
   }) {
     return _then(_$AuthStateImpl(
       userSession: null == userSession
           ? _value.userSession
           : userSession // ignore: cast_nullable_to_non_nullable
               as LoadedData<User>,
-      itWasUsedCode: null == itWasUsedCode
-          ? _value.itWasUsedCode
-          : itWasUsedCode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      itWasUsedFinger: null == itWasUsedFinger
-          ? _value.itWasUsedFinger
-          : itWasUsedFinger // ignore: cast_nullable_to_non_nullable
+      itWasUsedLocalAuth: null == itWasUsedLocalAuth
+          ? _value.itWasUsedLocalAuth
+          : itWasUsedLocalAuth // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -122,20 +109,16 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 
 class _$AuthStateImpl implements _AuthState {
   const _$AuthStateImpl(
-      {required this.userSession,
-      required this.itWasUsedCode,
-      required this.itWasUsedFinger});
+      {required this.userSession, required this.itWasUsedLocalAuth});
 
   @override
   final LoadedData<User> userSession;
   @override
-  final bool itWasUsedCode;
-  @override
-  final bool itWasUsedFinger;
+  final bool itWasUsedLocalAuth;
 
   @override
   String toString() {
-    return 'AuthState(userSession: $userSession, itWasUsedCode: $itWasUsedCode, itWasUsedFinger: $itWasUsedFinger)';
+    return 'AuthState(userSession: $userSession, itWasUsedLocalAuth: $itWasUsedLocalAuth)';
   }
 
   @override
@@ -145,15 +128,12 @@ class _$AuthStateImpl implements _AuthState {
             other is _$AuthStateImpl &&
             (identical(other.userSession, userSession) ||
                 other.userSession == userSession) &&
-            (identical(other.itWasUsedCode, itWasUsedCode) ||
-                other.itWasUsedCode == itWasUsedCode) &&
-            (identical(other.itWasUsedFinger, itWasUsedFinger) ||
-                other.itWasUsedFinger == itWasUsedFinger));
+            (identical(other.itWasUsedLocalAuth, itWasUsedLocalAuth) ||
+                other.itWasUsedLocalAuth == itWasUsedLocalAuth));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userSession, itWasUsedCode, itWasUsedFinger);
+  int get hashCode => Object.hash(runtimeType, userSession, itWasUsedLocalAuth);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -167,15 +147,12 @@ class _$AuthStateImpl implements _AuthState {
 abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {required final LoadedData<User> userSession,
-      required final bool itWasUsedCode,
-      required final bool itWasUsedFinger}) = _$AuthStateImpl;
+      required final bool itWasUsedLocalAuth}) = _$AuthStateImpl;
 
   @override
   LoadedData<User> get userSession;
   @override
-  bool get itWasUsedCode;
-  @override
-  bool get itWasUsedFinger;
+  bool get itWasUsedLocalAuth;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

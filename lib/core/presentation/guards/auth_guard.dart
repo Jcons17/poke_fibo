@@ -11,12 +11,12 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     await Future.delayed(Durations.medium3);
     if (authBloc.state.userSession.value != null) {
-      if (authBloc.state.itWasUsedCode || authBloc.state.itWasUsedFinger) {
+      if (authBloc.state.itWasUsedLocalAuth) {
         resolver.next(true);
         return;
       } else {
         // TODO: finger
-        resolver.next(true);
+        router.replace(BlockRoute());
         return;
       }
     } else {

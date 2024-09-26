@@ -9,4 +9,6 @@ abstract class AuthRepository {
   Future<Either<Exception, Unit>> logout();
 
   Future<Either<Exception, User>> signUp(User user);
+
+  Future<Either<Exception, Unit>> localAuth();
 }

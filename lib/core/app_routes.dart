@@ -21,6 +21,10 @@ class AppRouter extends RootStackRouter {
           path: "/sign-up",
         ),
         AutoRoute(
+          page: BlockRoute.page,
+          path: "/block",
+        ),
+        AutoRoute(
           page: PokemonDetailsRoute.page,
           path: "/pokemon",
         ),

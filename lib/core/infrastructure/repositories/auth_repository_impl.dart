@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_template/core/core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth/error_codes.dart' as auth_error;
+import 'package:local_auth_android/local_auth_android.dart';
+import 'package:local_auth_darwin/local_auth_darwin.dart';
 
 @LazySingleton(
   as: AuthRepository,
@@ -103,6 +108,41 @@ class AuthRepositoryImpl implements AuthRepository {
       if (userLoggin == null) return left(Exception("There is no session active"));
 
       return right(UserDto.fromJson(userLoggin));
+    } on Exception catch (e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<Exception, Unit>> localAuth() async {
+    final LocalAuthentication auth = LocalAuthentication();
+
+    final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
+    final bool canAuthenticate = canAuthenticateWithBiometrics || await auth.isDeviceSupported();
+
+    if (canAuthenticate == false) return right(unit);
+
+    try {
+      final bool didAuthenticate = await auth.authenticate(
+        localizedReason: 'Please authenticate to continue',
+        authMessages: [
+          AndroidAuthMessages(
+            signInTitle: 'Wee need your biometric for security reasons',
+            cancelButton: 'No thanks',
+          ),
+          IOSAuthMessages(
+            cancelButton: 'No thanks',
+          ),
+        ],
+        options: const AuthenticationOptions(
+          useErrorDialogs: true,
+          stickyAuth: true,
+        ),
+      );
+
+      if (didAuthenticate == false) return left(Exception("There has been an error auth"));
+
+      return right(unit);
     } on Exception catch (e) {
       return left(e);
     }

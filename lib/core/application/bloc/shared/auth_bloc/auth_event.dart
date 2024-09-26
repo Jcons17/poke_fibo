@@ -19,6 +19,8 @@ class GetSession implements AuthEvent {}
 
 class Logout implements AuthEvent {}
 
-class PutFinger implements AuthEvent {}
+class LocalAuth implements AuthEvent {
+  final bool bypass;
 
-class PutCode implements AuthEvent {}
+  LocalAuth({required this.bypass});
+}

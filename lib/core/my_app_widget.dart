@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp.router(
         title: 'Poke Api',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.dark),
           useMaterial3: true,
         ),
         localizationsDelegates: const [

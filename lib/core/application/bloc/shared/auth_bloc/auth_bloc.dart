@@ -20,7 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(state.copyWith(userSession: state.userSession.copyWithLoading()));
           final result = await authRepository.login(email, code);
 
-          emit(state.copyWith(userSession: state.userSession.copyWithData(data: result), itWasUsedCode: true));
+          emit(state.copyWith(userSession: state.userSession.copyWithData(data: result)));
 
           return;
         case MakeSignUp(user: final user):
@@ -43,16 +43,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           result.fold(
             (l) {},
             (r) {
-              emit(state.copyWith(userSession: LoadedData()));
+              emit(
+                state.copyWith(
+                  userSession: LoadedData(),
+                  itWasUsedLocalAuth: false,
+                ),
+              );
             },
           );
 
           return;
-        case PutFinger():
-          emit(state.copyWith(itWasUsedFinger: true));
-          return;
-        case PutCode():
-          emit(state.copyWith(itWasUsedCode: true));
+        case LocalAuth(bypass: final bypass):
+          if (bypass) {
+            emit(state.copyWith(itWasUsedLocalAuth: true));
+          }
+
+          final result = await authRepository.localAuth();
+
+          emit(state.copyWith(itWasUsedLocalAuth: result.isRight()));
+
           return;
       }
     });
@@ -72,5 +81,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void logout() {
     add(Logout());
+  }
+
+  void localAuth(bool bypass) {
+    add(LocalAuth(bypass: bypass));
   }
 }

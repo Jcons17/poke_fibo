@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_template/core/core.dart';
-import 'package:flutter_template/core/presentation/pages/home/home_page.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 
 class GridItemPokemon extends StatelessWidget {
@@ -54,10 +53,12 @@ class GridItemPokemon extends StatelessWidget {
                         color: bgColor,
                       ),
                       child: Center(
-                        child: Text(
-                          pokemon.name,
-                          style: TextStyle(
-                            color: Colors.white,
+                        child: FittedBox(
+                          child: Text(
+                            pokemon.name,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

@@ -24,7 +24,6 @@ class _GridPokemonState extends State<GridPokemon> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -35,9 +34,7 @@ class _GridPokemonState extends State<GridPokemon> {
   }
 
   void _scrollListener() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-      context.read<PokemonBloc>().getAllPokemons();
-    }
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
   }
 
   @override

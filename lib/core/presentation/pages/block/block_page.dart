@@ -42,7 +42,7 @@ class BlockPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                context.read<AuthBloc>().localAuth(false);
+                context.read<AuthBloc>().localAuth(true);
               },
               child: SizedBox(
                 width: 200,

@@ -33,15 +33,7 @@ class MainPage extends StatelessWidget {
               listenWhen: (previous, current) => previous.addPokemonToMyTeam.errored != current.addPokemonToMyTeam.errored,
               listener: (context, state) {
                 if (state.addPokemonToMyTeam.errored) {
-                  Fluttertoast.showToast(
-                    msg: state.addPokemonToMyTeam.exception.toString(),
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red.shade300,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
+                  context.snackBarError(state.addPokemonToMyTeam.exception.toString());
                 }
               },
               child: AutoTabsScaffold(

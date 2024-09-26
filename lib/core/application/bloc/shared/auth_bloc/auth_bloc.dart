@@ -56,6 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         case LocalAuth(bypass: final bypass):
           if (bypass) {
             emit(state.copyWith(itWasUsedLocalAuth: true));
+            return;
           }
 
           final result = await authRepository.localAuth();

@@ -56,7 +56,7 @@ class PokemonDetailsPage extends StatelessWidget {
                       width: double.infinity,
                       child: Text(
                         "General Stats: ",
-                        style: context.theme.textTheme.titleLarge!.copyWith(color: context.theme.primaryColor),
+                        style: context.theme.textTheme.titleLarge,
                       ),
                     ),
                     Gap(16),
@@ -157,11 +157,12 @@ class PokemonDetailsPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Gap(16),
                     SizedBox(
                       width: double.infinity,
                       child: Text(
                         "Move Stats: ",
-                        style: context.theme.textTheme.titleLarge!.copyWith(color: context.theme.primaryColor),
+                        style: context.theme.textTheme.titleLarge,
                       ),
                     ),
                     BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
@@ -176,7 +177,7 @@ class PokemonDetailsPage extends StatelessWidget {
                                   width: double.infinity,
                                   child: Text(
                                     "Power",
-                                    style: context.theme.textTheme.titleMedium!.copyWith(color: context.theme.primaryColor),
+                                    style: context.theme.textTheme.titleMedium,
                                   ),
                                 ),
                                 createChart(
@@ -189,11 +190,12 @@ class PokemonDetailsPage extends StatelessWidget {
                                     },
                                   ).toList(),
                                 ),
+                                Gap(16),
                                 SizedBox(
                                   width: double.infinity,
                                   child: Text(
                                     "Accuracy",
-                                    style: context.theme.textTheme.titleMedium!.copyWith(color: context.theme.primaryColor),
+                                    style: context.theme.textTheme.titleMedium,
                                   ),
                                 ),
                                 createChart(
@@ -206,11 +208,12 @@ class PokemonDetailsPage extends StatelessWidget {
                                     },
                                   ).toList(),
                                 ),
+                                Gap(16),
                                 SizedBox(
                                   width: double.infinity,
                                   child: Text(
                                     "Power Points",
-                                    style: context.theme.textTheme.titleMedium!.copyWith(color: context.theme.primaryColor),
+                                    style: context.theme.textTheme.titleMedium,
                                   ),
                                 ),
                                 createChart(

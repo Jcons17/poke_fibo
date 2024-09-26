@@ -33,74 +33,82 @@ class HomePage extends StatelessWidget {
       body: Container(
         child: BlocBuilder<PokemonBloc, PokemonState>(
           builder: (context, state) {
-            return LoadedDataBuilder(
-              data: state.allPokemons,
-              onException: (context, data) {
-                return SizedBox.expand(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: Colors.red.shade200,
-                      ),
-                      Gap(16),
-                      Text(data.toString()),
-                      Gap(16),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<PokemonBloc>().getAllPokemons();
-                        },
-                        child: Text(
-                          'Try again',
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+            return NotificationListener<ScrollEndNotification>(
+              onNotification: (notification) {
+                if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+                  context.read<PokemonBloc>().getAllPokemons();
+                }
+                return true;
               },
-              onLoading: (context, cachedData) {
-                if (cachedData != null) {
-                  return AbsorbPointer(
-                    absorbing: true,
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: GridPokemon(
-                        data: cachedData,
-                        favorites: state.myPokemons.value ?? [],
-                      ),
+              child: LoadedDataBuilder(
+                data: state.allPokemons,
+                onException: (context, data) {
+                  return SizedBox.expand(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          color: Colors.red.shade200,
+                        ),
+                        Gap(16),
+                        Text(data.toString()),
+                        Gap(16),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.read<PokemonBloc>().getAllPokemons();
+                          },
+                          child: Text(
+                            'Try again',
+                          ),
+                        ),
+                      ],
                     ),
                   );
-                }
-
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 1,
-                  ),
-                  itemCount: 18,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.white,
-                          highlightColor: Colors.grey,
-                          child: SizedBox.expand(),
+                },
+                onLoading: (context, cachedData) {
+                  if (cachedData != null) {
+                    return AbsorbPointer(
+                      absorbing: true,
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: GridPokemon(
+                          data: cachedData,
+                          favorites: state.myPokemons.value ?? [],
                         ),
                       ),
                     );
-                  },
-                );
-              },
-              onData: (context, data) {
-                return GridPokemon(
-                  data: data,
-                  favorites: state.myPokemons.value ?? [],
-                );
-              },
+                  }
+
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1,
+                    ),
+                    itemCount: 18,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.grey,
+                            child: SizedBox.expand(),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                onData: (context, data) {
+                  return GridPokemon(
+                    data: data,
+                    favorites: state.myPokemons.value ?? [],
+                  );
+                },
+              ),
             );
           },
         ),
